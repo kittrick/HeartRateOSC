@@ -2,7 +2,7 @@
 
 This project is a copy of Trent Brooks HeartRateOSC project. I'm attempting to update it for use with the latest versions of OSX and OpenFrameworks. It now compiles successfully but has not yet been tested with a live device.
 
-Original Project here: (https://github.com/trentbrooks/HeartRateOSC)
+Original Project here: https://github.com/trentbrooks/HeartRateOSC
 
 HeartRateOSC connects to Bluetooth Low Energy Heart Rate Monitor devices. Data from the device is converted to OSC messages. Project was commisioned by George Khut (http://georgekhut.com), who kindly allowed this to be released Open Source. 
 
