@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
+#import <CoreBluetooth/CoreBluetooth.h>
 #import <IOBluetooth/IOBluetooth.h>
 #import <Foundation/Foundation.h>
 
@@ -17,9 +18,11 @@
 
 class ofxBLEHeartRate;
 
+
 // OBJC DELEGATE
 //--------------------------------------------------------------
-@interface ofxBLEHeartRateDelegate : NSObject<CBCentralManagerDelegate, CBPeripheralDelegate>  {
+
+@interface ofxBLEHeartRateDelegate : NSObject <CBCentralManagerDelegate, CBPeripheralDelegate>{
     
     NSTimer *pulseTimer;
     //NSArrayController *arrayController;

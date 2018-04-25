@@ -17,10 +17,10 @@ ofxBLEHeartRate::~ofxBLEHeartRate(){
 }
 
 /*void ofxBLEHeartRate::onPulse(int heartRate) {
-    
-    ofLog() << "Heart rate: " << heartRate;
-    ofNotifyEvent(pulseEvent, heartRate, this);
-}*/
+ 
+ ofLog() << "Heart rate: " << heartRate;
+ ofNotifyEvent(pulseEvent, heartRate, this);
+ }*/
 
 //--------------------------------------------------------------
 void ofxBLEHeartRate::startScan(){
@@ -36,13 +36,13 @@ void ofxBLEHeartRate::connectDevice(string peripheralId) {
 }
 
 /*void ofxBLEHeartRate::update(){
-
-}
-
-//--------------------------------------------------------------
-void ofxBLEHeartRate::draw(){
-
-}*/
+ 
+ }
+ 
+ //--------------------------------------------------------------
+ void ofxBLEHeartRate::draw(){
+ 
+ }*/
 
 
 
@@ -57,7 +57,7 @@ void ofxBLEHeartRate::draw(){
 //@synthesize connected;
 
 - (id) init :(ofxBLEHeartRate *)bleCpp {
-    if(self = [super init])	{
+    if(self = [super init])    {
         //NSLog(@"ofxBLEHeartRate initiated");
         ofLog() << "ofxBLEHeartRate initiated";
         bleHeartRateCpp = bleCpp; // ref to OF instance
@@ -119,16 +119,16 @@ void ofxBLEHeartRate::draw(){
 - (void) pulse
 {
     /*CABasicAnimation *pulseAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
-    
-    pulseAnimation.toValue = [NSNumber numberWithFloat:PULSESCALE];
-    pulseAnimation.fromValue = [NSNumber numberWithFloat:1.0];
-    
-    pulseAnimation.duration = PULSEDURATION;
-    pulseAnimation.repeatCount = 1;
-    pulseAnimation.autoreverses = YES;
-    pulseAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
-    
-    [[heartView layer] addAnimation:pulseAnimation forKey:@"scale"];*/
+     
+     pulseAnimation.toValue = [NSNumber numberWithFloat:PULSESCALE];
+     pulseAnimation.fromValue = [NSNumber numberWithFloat:1.0];
+     
+     pulseAnimation.duration = PULSEDURATION;
+     pulseAnimation.repeatCount = 1;
+     pulseAnimation.autoreverses = YES;
+     pulseAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
+     
+     [[heartView layer] addAnimation:pulseAnimation forKey:@"scale"];*/
     
     //NSLog(@"Pulse: %d", heartRate );
     //bleHeartRateCpp->onPulse(heartRate);
@@ -295,20 +295,20 @@ void ofxBLEHeartRate::draw(){
             ofxBLEHeartRateEventArgs args(string([aPeripheral.identifier.UUIDString UTF8String]), string([aPeripheral.name UTF8String]), heartRate,aPeripheral.RSSI.intValue, "Retrieved device");
             ofNotifyEvent(bleHeartRateCpp->statusEvent, args);
         }
-
+        
         
         // if we are not connected at all - auto connect to first itme
         /*if(!isConnected) {
-            
-            //isConnected = TRUE; // this actually means pending connection
-            
-            CBPeripheral* firstPeripheral = [peripherals objectAtIndex:0];
-            
-            //[manager connectPeripheral:firstPeripheral options:[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:CBConnectPeripheralOptionNotifyOnDisconnectionKey]];
-            
-            // connect to this peripheral's id
-            [self connectDevice:firstPeripheral.identifier.UUIDString];
-        }*/
+         
+         //isConnected = TRUE; // this actually means pending connection
+         
+         CBPeripheral* firstPeripheral = [peripherals objectAtIndex:0];
+         
+         //[manager connectPeripheral:firstPeripheral options:[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:CBConnectPeripheralOptionNotifyOnDisconnectionKey]];
+         
+         // connect to this peripheral's id
+         [self connectDevice:firstPeripheral.identifier.UUIDString];
+         }*/
         
     }
 }
@@ -334,10 +334,10 @@ void ofxBLEHeartRate::draw(){
     //NSLog(@"Connected to peripheral %@", aPeripheral.name);
     ofLog() << "Connected to peripheral: " << string([peripheral.name UTF8String]);
     /*self.connected = @"Connected";
-    [connectButton setTitle:@"Disconnect"];
-    [indicatorButton setHidden:TRUE];
-    [progressIndicator setHidden:TRUE];
-    [progressIndicator stopAnimation:self];*/
+     [connectButton setTitle:@"Disconnect"];
+     [indicatorButton setHidden:TRUE];
+     [progressIndicator setHidden:TRUE];
+     [progressIndicator stopAnimation:self];*/
     
     
     
@@ -426,7 +426,7 @@ void ofxBLEHeartRate::draw(){
         }
         
         /* GAP (Generic Access Profile) for Device Name */
-        if ( [aService.UUID isEqual:[CBUUID UUIDWithString:CBUUIDGenericAccessProfileString]] )
+        if ( [aService.UUID isEqual:[CBUUID UUIDWithString:@"1800"]] )
         {
             [aPeripheral discoverCharacteristics:nil forService:aService];
             ofxBLEHeartRateEventArgs args(string([aPeripheral.identifier.UUIDString UTF8String]), string([aPeripheral.name UTF8String]), heartRate,aPeripheral.RSSI.intValue, "Service found: GenericAccessProfile");
@@ -465,7 +465,7 @@ void ofxBLEHeartRate::draw(){
                 ofLog() << "Found a Body Sensor Location Characteristic";
                 ofxBLEHeartRateEventArgs args(string([aPeripheral.identifier.UUIDString UTF8String]), string([aPeripheral.name UTF8String]), heartRate,aPeripheral.RSSI.intValue, "Found body sensor location characteristic: 2A38");
                 ofNotifyEvent(bleHeartRateCpp->statusEvent, args);
-
+                
             }
             
             /* Write heart rate control point */
@@ -478,12 +478,12 @@ void ofxBLEHeartRate::draw(){
         }
     }
     
-    if ( [service.UUID isEqual:[CBUUID UUIDWithString:CBUUIDGenericAccessProfileString]] )
+    if ( [service.UUID isEqual:[CBUUID UUIDWithString:@"1800"]] )
     {
         for (CBCharacteristic *aChar in service.characteristics)
         {
             /* Read device name */
-            if ([aChar.UUID isEqual:[CBUUID UUIDWithString:CBUUIDDeviceNameString]])
+            if ([aChar.UUID isEqual:[CBUUID UUIDWithString:@"2A00"]])
             {
                 [aPeripheral readValueForCharacteristic:aChar];
                 //NSLog(@"Found a Device Name Characteristic");
@@ -569,7 +569,7 @@ void ofxBLEHeartRate::draw(){
         }
     }
     /* Value for device Name received */
-    else if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:CBUUIDDeviceNameString]])
+    else if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:@"1800"]])
     {
         NSString * deviceName = [[[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding] autorelease];
         //NSLog(@"Device Name = %@", deviceName);
@@ -589,8 +589,9 @@ void ofxBLEHeartRate::draw(){
 }
 
 - (void) peripheralDidUpdateRSSI:(CBPeripheral *)peripheral
-                          error:(NSError *)error {
+                           error:(NSError *)error {
     //NSLog(@"ok rssi: %@", [peripheral RSSI]);
 }
 
 @end
+
