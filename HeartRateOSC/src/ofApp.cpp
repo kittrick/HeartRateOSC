@@ -44,7 +44,6 @@ void ofApp::setupGUI() {
     
     settings.setupSendOSC(host, port);
     
-    
     int smallHeight = 20;
     int bigHeight = 35;
     int bigWidth = 512 - 40;
@@ -122,6 +121,7 @@ void ofApp::onHRMEvent(ofxBLEHeartRateEventArgs& args) {
     this->heartRate = args.data;
     ofxOscMessage msg;
     msg.setAddress("/hrm");
+    msg.addIntArg(heartRate);
     msg.addStringArg(args.peripheralId);
     msg.addStringArg(args.peripheralName);
     msg.addIntArg(args.data);
