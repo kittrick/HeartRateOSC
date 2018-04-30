@@ -32,8 +32,8 @@ void draw() {
 }
 
 void oscEvent(OscMessage theOscMessage) {
-  heartRate = theOscMessage.get(3).intValue();
-  println(theOscMessage.get(3).intValue());
+  heartRate = theOscMessage.get(2).intValue();
+  println(theOscMessage.get(2).intValue());
 }
 
 

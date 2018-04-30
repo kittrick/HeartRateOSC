@@ -121,7 +121,6 @@ void ofApp::onHRMEvent(ofxBLEHeartRateEventArgs& args) {
     this->heartRate = args.data;
     ofxOscMessage msg;
     msg.setAddress("/hrm");
-    msg.addIntArg(heartRate);
     msg.addStringArg(args.peripheralId);
     msg.addStringArg(args.peripheralName);
     msg.addIntArg(args.data);
